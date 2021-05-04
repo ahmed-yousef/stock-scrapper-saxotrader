@@ -4,7 +4,7 @@ import os
 import pandas as pd
 
 #get stock data to scrape
-
+print('script works only with stocks no other instruments are supported')
 stocks= pd.read_excel(r'D:\\1ahmed\\Python Scripts\\stock-scrapper-saxotrader\\DATA_2_EXTRACT.xlsx',sheet_name='Sheet1')
 
 url = 'https://www.saxotrader.com/sim/openapi/chart/v3/charts?Mode=UpTo&FieldGroups=Data&count=1200&Horizon=60&Uic={0}&AssetType={1}&Time={2}T00%3A00%3A00.000Z'
