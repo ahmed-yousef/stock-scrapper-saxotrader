@@ -2,7 +2,10 @@ import requests as rq
 import json
 import os
 import pandas as pd
+from requests.packages import urllib3
 
+#disable annoying insecure requests message
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 #get stock data to scrape
 print('script works only with stocks no other instruments are supported')
