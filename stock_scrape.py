@@ -23,16 +23,12 @@ for num in range(len(stocks)):
     stock_type = stocks['assest_type'][num]
 
     #handle data rq not getting 200
-    
-    def send_rq():
-        rq_sent = rq.get(url.format(stcok_num,stock_type,date),headers=headers,verify=False)
-        return rq_sent
-
-    #my retry method (brutforce)
-    try:
-        data = send_rq()
-    except:
-        data = send_rq()
+    rq_status = 409
+    while rq_status == 409:
+        data = rq.get(url.format(stcok_num,stock_type,date),headers=headers,verify=False)
+        if data.status_code in [200,201,400,404]:
+            break
+       
 
     print("data status is "+str(data.status_code)+' Stock scrapped is '+stock_name+' num:'+stcok_num+' asset type '+stock_type)
     #process data into json
