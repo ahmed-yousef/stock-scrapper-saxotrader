@@ -3,6 +3,7 @@ import json
 import os
 import pandas as pd
 
+
 #get stock data to scrape
 print('script works only with stocks no other instruments are supported')
 stocks= pd.read_excel(r'D:\\1ahmed\\Python Scripts\\stock-scrapper-saxotrader\\DATA_2_EXTRACT.xlsx',sheet_name='Sheet1')
@@ -30,9 +31,12 @@ for num in range(len(stocks)):
     except:
         data = send_rq()
 
-    print("data status is "+str(data.status_code)+' Stock scrapped is '+stock_name+' num:'+stcok_num)
+    print("data status is "+str(data.status_code)+' Stock scrapped is '+stock_name+' num:'+stcok_num+' asset type '+stock_type)
     #process data into json
-    data_dict = json.loads(data.text)
+    try:
+        data_dict = json.loads(data.text)
+    except:
+        pass
     #print(len(data_dict['Data']))
     #create dir for saving files
     save_dir = os.getcwd()+'\\data_collected'
